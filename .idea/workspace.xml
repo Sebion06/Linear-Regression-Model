@@ -14,7 +14,18 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="D:\Project\regression_model\.idea" />
+      </set>
+    </option>
+  </component>
   <component name="ProjectId" id="1bk6Cz8Xq7PPd8L2yIX7vL1gzNm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -114,6 +125,7 @@
       <workItem from="1589597672382" duration="7158000" />
       <workItem from="1589644853460" duration="1455000" />
       <workItem from="1589675798538" duration="4302000" />
+      <workItem from="1589743156176" duration="599000" />
     </task>
     <servers />
   </component>
