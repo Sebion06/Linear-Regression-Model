@@ -9,18 +9,17 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split
 import seaborn as sns
 
-#Read the data
-from sklearn.model_selection import train_test_split
 
+#Read the data
 training_df = pd.read_csv("train.csv")
 test_df=pd.read_csv("test.csv")
 pd.set_option('display.max_columns', None)
 
 #scale the label into units of MILLION$
 training_df["revenue"] /= 1000000.0
-
 
 #Get header list for all values (just in case)
 items_list=[]
@@ -30,7 +29,6 @@ for items in training_df.head():
         items_list.append(items)
 items_list=['P2','P28']
 '''
-
 
 #Show heatmap of relevant features
 plt.figure(figsize=(20,18))
@@ -55,7 +53,6 @@ sns.distplot(training_df['revenue'], label="training revenue estimate")
 plt.legend()
 plt.show()
 
-
 #Separate the train data into training and validation data (85% to 15%)
 x_train, x_val, y_train, y_val = train_test_split(x, y, test_size=0.15, random_state=0)
 
@@ -70,14 +67,14 @@ print("Model coef:")
 print(model.coef_)
 print("Model intercept: "+ str(model.intercept_))
 
-
 #Make predictions on validation data
 y_val_pred = model.predict(x_val)
 
 #Check out the score and the mean squared error
 print('Mean Squared Error:', mean_squared_error(y_val, y_val_pred))
 
-''' View how close were the predictions to the actual data 
+''' 
+#View how close were the predictions to the actual data 
 df = pd.DataFrame({'Actual value': y_val, 'Predicted value': y_val_pred})
 df1 = df.head(25)
 print(df1)
