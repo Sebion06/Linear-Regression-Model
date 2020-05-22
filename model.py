@@ -78,7 +78,7 @@ y_val_pred = model.predict(x_val)
 print('Mean Squared Error:', mean_squared_error(y_val, y_val_pred))
 
 ''' View how close were the predictions to the actual data 
-df = pd.DataFrame({'Actual validation': y_val, 'Pred validation': y_val_pred})
+df = pd.DataFrame({'Actual value': y_val, 'Predicted value': y_val_pred})
 df1 = df.head(25)
 print(df1)
 '''
