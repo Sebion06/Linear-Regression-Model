@@ -1,21 +1,26 @@
 """
-Linear Regression Model for predicting restaurant prices
+Linear Regression Model for predicting restaurant prices using the scikit-learn Linear Regression Algorithm
 
 Copyright 2020 Moticica Sebastian-Ionut, Deaconu Constantin
 
 """
 import numpy as np
 import pandas as pd
+import seaborn as sns
 from matplotlib import pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
-import seaborn as sns
 
 
 #Read the data
 training_df = pd.read_csv("train.csv")
 test_df=pd.read_csv("test.csv")
+
+#Fill NaN values if any
+training_df.fillna(0)
+test_df.fillna(0)
+
 pd.set_option('display.max_columns', None)
 
 #scale the label into units of MILLION$
@@ -31,16 +36,16 @@ items_list=['P2','P28']
 '''
 
 #Show heatmap of relevant features
-plt.figure(figsize=(20,18))
+plt.figure(figsize=(22,22))
 cor = training_df.corr()
 sns.heatmap(cor, annot=True, cmap=plt.cm.Reds)
 plt.show()
 
 #Select correlated features
 cor_target = abs(cor["revenue"])
-relevant_features = cor_target[cor_target>0.11] #there's not a lot of them so NO LINEAR CORRELATION?
+relevant_features = cor_target[cor_target>0.11]    #get features that have some correlation with the target value
 items_list=list(relevant_features.index.values)
-del items_list[-1] #remove the revenue element as the correlation is 1.0
+del items_list[-1]  #remove the last element ("revenue") as the correlation is 1.0
 
 #Set the data
 x=training_df[items_list].values
@@ -60,11 +65,9 @@ x_train, x_val, y_train, y_val = train_test_split(x, y, test_size=0.15, random_s
 model= LinearRegression()
 model.fit(x_train,y_train)
 
-#Check out sweet stats if you want
-print("Model feat:")
-print(items_list)
-print("Model coef:")
-print(model.coef_)
+
+print("Model features: "+str(items_list))
+print("Model coefficients:" +str(model.coef_))
 print("Model intercept: "+ str(model.intercept_))
 
 #Make predictions on validation data
@@ -73,8 +76,8 @@ y_val_pred = model.predict(x_val)
 #Check out the score and the mean squared error
 print('Mean Squared Error:', mean_squared_error(y_val, y_val_pred))
 
+#View how close the predictions were to the actual data (if wanted)
 ''' 
-#View how close were the predictions to the actual data 
 df = pd.DataFrame({'Actual value': y_val, 'Predicted value': y_val_pred})
 df1 = df.head(25)
 print(df1)
