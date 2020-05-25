@@ -36,7 +36,7 @@ items_list=['P2','P28']
 '''
 
 #Show heatmap of relevant features
-plt.figure(figsize=(22,22))
+plt.figure(figsize=(24,22))
 cor = training_df.corr()
 sns.heatmap(cor, annot=True, cmap=plt.cm.Reds)
 plt.show()
